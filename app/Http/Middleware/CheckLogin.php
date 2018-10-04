@@ -16,10 +16,13 @@ class CheckLogin
      */
     public function handle( $request, Closure $next)
     {
-
-        if ($request->username == 'admin'){
-            if ($request->pass == 'admin'){
-                return redirect()->route('list');
+        $login = new LoginController();
+        $users = $login->getData();
+        foreach ($users as $user) {
+            if ($request->usernames == $user['username']) {
+                if ($request->pass == $user['password']) {
+                    return redirect()->route('list');
+                }
             }
         }
         return $next($request);
