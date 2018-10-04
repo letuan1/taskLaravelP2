@@ -28,6 +28,6 @@ Route::prefix('tasks')->group(function () {
 
     Route::post('{id1}/update/', 'TaskController@update')->name('updateData');
 
-//    Route::get('login', '')
+    Route::get('/', 'LoginController@index')->middleware('login');
 
 });

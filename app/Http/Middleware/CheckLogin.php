@@ -14,17 +14,14 @@ class CheckLogin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle( $request, Closure $next)
     {
-        $loginController = new LoginController();
-        $users = $loginController->getData();
-        foreach ($users as $user) {
-            if ($request->input('username') == $user->username)
-                if ($request->input('pass') == $user->password){
-                    return redirect()->route('list');
-                }
-            }
 
+        if ($request->username == 'admin'){
+            if ($request->pass == 'admin'){
+                return redirect()->route('list');
+            }
+        }
         return $next($request);
     }
 }
