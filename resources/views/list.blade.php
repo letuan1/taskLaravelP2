@@ -62,7 +62,8 @@
 
                 <td>
 
-                   <a href="{{ route('update', $list->id) }}">Sửa</a> | <a href="{{ route('delete', $list->id) }}">Xóa</a>
+                    <a href="{{ route('update', $list->id) }}">Sửa</a> | <a
+                            href="{{ route('delete', $list->id) }}">Xóa</a>
 
                 </td>
 

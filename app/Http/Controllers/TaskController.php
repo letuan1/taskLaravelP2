@@ -82,11 +82,11 @@ class TaskController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         $update = Task::where('id', $id)->update([
-                'id' => $request->id,
-                'name' => "$request->name",
-                'phone' => $request->phone,
-                'email' => "$request->email"
-            ]);
+            'id' => $request->id,
+            'name' => "$request->name",
+            'phone' => $request->phone,
+            'email' => "$request->email"
+        ]);
         return redirect()->route('list');
 
     }
