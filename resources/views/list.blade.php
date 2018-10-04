@@ -63,7 +63,7 @@
                 <td>
 
                     <a href="{{ route('update', $list->id) }}">Sửa</a> | <a
-                            href="{{ route('delete', $list->id) }}">Xóa</a>
+                            href="{{ route('delete', $list->id) }}" onclick="return confirm('bạn có muốn xóa không ')">Xóa</a>
 
                 </td>
 
