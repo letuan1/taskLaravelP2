@@ -1,5 +1,7 @@
 <?php
 
+use App\Model\LoginModel;
+
 return [
 
     /*
@@ -15,7 +17,51 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'user',
+    ],
+
+
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'user',
+        ],
+
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'user',
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+    ],
+
+    'providers' => [
+        'user' => [
+            'driver' => 'eloquent',
+            'model' => LoginModel::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => LoginModel::class,
+        ],
+
+    ],
+
+    'passwords' => [
+        'user' => [
+            'provider' => 'user',
+            'username' => 'auth.username.password',
+            'table' => 'user',
+            'expire' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
+            'username' => 'auth.username.password',
+            'table' => 'user',
+            'expire' => 60,
+        ],
     ],
 
     /*
@@ -38,12 +84,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'user',
         ],
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'user',
         ],
     ],
 
@@ -65,15 +111,15 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'user' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => LoginModel::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+         'user' => [
+             'driver' => 'database',
+             'table' => 'user',
+         ],
     ],
 
     /*
@@ -92,9 +138,9 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
+        'user' => [
+            'provider' => 'user',
+            'table' => 'user',
             'expire' => 60,
         ],
     ],

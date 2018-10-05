@@ -79,10 +79,10 @@ class TaskController extends Controller
      * @param  \App\Task $task
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(CreateRequest $request, $id)
     {
-        $update = Task::where('id', $id)->update([
-            'id' => $request->id,
+        $update = Task::where('id', $id)
+            ->update([
             'name' => "$request->name",
             'phone' => $request->phone,
             'email' => "$request->email"
@@ -101,5 +101,14 @@ class TaskController extends Controller
     {
         $delete = Task::find($id)->delete();
         return redirect()->route('list');
+    }
+
+    public function search(Request $request) {
+        $lists =  Task::where('name','like',"%".$request->search."%")
+            ->orWhere('phone', 'like', "%".$request->search."%")
+            ->orWhere('id', 'like', "%".$request->search."%")
+            ->orWhere('email', 'like', "%".$request->search."%")
+            ->get();
+        return view('search', compact('lists'));
     }
 }

@@ -14,8 +14,11 @@
 
 Route::prefix('tasks')->group(function () {
 
+    Route::get('/', 'LoginController@index');
 
     Route::get('/list', 'TaskController@index')->name('list');
+
+    Route::get('search', 'TaskController@search')->name('search');
 
     Route::get('{id}/delete/', 'TaskController@destroy')->name('delete');
 
@@ -27,6 +30,5 @@ Route::prefix('tasks')->group(function () {
 
     Route::post('{id1}/update/', 'TaskController@update')->name('updateData');
 
-    Route::get('/', 'LoginController@index')->middleware('login');
-
+    Route::post('/login', 'LoginController@checkLoginOrSignUp')->name('login');
 });
